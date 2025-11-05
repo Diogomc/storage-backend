@@ -8,6 +8,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
+        builder.ToTable("Category");
         builder.HasKey(c => c.CategoryId);
         builder.Property(c => c.CategoryName).HasMaxLength(200).IsRequired();
     }

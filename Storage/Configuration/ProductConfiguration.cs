@@ -8,6 +8,7 @@ namespace Storage.Configuration
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.ToTable("Product");
             builder.HasKey(p => p.ProductId);
             builder.Property(p => p.ProductName).HasMaxLength(200).IsRequired();
             builder.Property(p => p.ExpirationDate).IsRequired();
