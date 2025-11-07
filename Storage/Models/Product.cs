@@ -1,7 +1,10 @@
-﻿namespace Storage.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Storage.Models;
 
 public class Product
 {
+    [JsonIgnore]
     public int ProductId { get; set; }
     public string? ProductName { get; set; }
     public DateTime ExpirationDate { get; set; }
@@ -10,6 +13,7 @@ public class Product
     public string? ProductBrand { get; set; }
 
     public int CategoryId { get; set; }
+    [JsonIgnore]
     public Category? categories { get; set; }
 
 }
