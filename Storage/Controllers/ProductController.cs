@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Storage.Context;
+using Storage.DTOs;
+using Storage.DTOs.Mappings;
 using Storage.Models;
 using Storage.Repositories;
 
@@ -16,41 +18,56 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Product>> Get()
+    public ActionResult<IEnumerable<ProductDTO>> Get()
     {
         var products = _uow.ProductRepository.GetAll().ToList();
-        return Ok(products);
+        var productsDto = products.ToProductDTOList();
+        return Ok(productsDto);
     }
     [HttpGet("{id:int}", Name = "TakeProduct")]
-    public ActionResult<Product> GetById(int id)
+    public ActionResult<ProductDTO> GetById(int id)
     {
         var getProductId = _uow.ProductRepository.GetById(p => p.ProductId == id);
+
+        var productDto = getProductId.ToProductDTO();
         return Ok(getProductId);
     }
     [HttpPost]
-    public ActionResult<Product> Post(Product product)
+    public ActionResult<ProductDTO> Post(ProductDTO productDto)
     {
+        var product = productDto.ToProduct();
+
         var createProduct = _uow.ProductRepository.Create(product);
         _uow.Commit();
 
+        var createProductDto = createProduct.ToProductDTO();
+
         return new CreatedAtRouteResult("TakeProduct",
-            new { id = product.ProductId }, createProduct);
+            new { id = createProductDto.ProductId }, createProductDto);
     }
+
+
     [HttpDelete("{id:int}")]
-    public ActionResult<Product> Delete(int id)
+    public ActionResult<ProductDTO> Delete(int id)
     {
         var getProductId = _uow.ProductRepository.GetById(p => p.ProductId == id);
-        _uow.ProductRepository.Delete(getProductId);
+
+        var deletedProduct = _uow.ProductRepository.Delete(getProductId);
         _uow.Commit();
 
-        return Ok(getProductId);
+        var productDto = deletedProduct.ToProductDTO();
+
+        return Ok(productDto);
     }
 
     [HttpPut("{id:int}")]
-    public ActionResult<Product> Put(int id, Product product)
+    public ActionResult<ProductDTO> Put(int id, ProductDTO productDto)
     {
-        _uow.ProductRepository.Update(product);
+        var product = productDto.ToProduct();
+        var editedProduct = _uow.ProductRepository.Update(product);
         _uow.Commit();
-        return Ok(product);
+
+        var editedProductDto = editedProduct.ToProductDTO();
+        return Ok(editedProductDto);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Storage.DTOs;
+using Storage.DTOs.Mappings;
 using Storage.Models;
 using Storage.Repositories;
 
@@ -15,39 +17,58 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Category>> Get()
+    public ActionResult<IEnumerable<CategoryDTO>> Get()
     {
-        return _uow.CategoryRepository.GetAll().ToList();
+        var getCategories = _uow.CategoryRepository.GetAll().ToList();
+
+        var categoriesDto = getCategories.ToCategoryDTOList();
+
+        return Ok(categoriesDto);
     }
     [HttpGet("{id:int}", Name ="TakeCategory")]
-    public ActionResult<Category> GetById(int id)
+    public ActionResult<CategoryDTO> GetById(int id)
     {
         var getCategoryId = _uow.CategoryRepository.GetById(c => c.CategoryId == id);
-        return Ok(getCategoryId);
+
+        var categoryDtoId = getCategoryId.ToCategoryDTO();
+
+        return Ok(categoryDtoId);
     }
     [HttpPost]
-    public ActionResult<Category> Post (Category category)
+    public ActionResult<CategoryDTO> Post (CategoryDTO categoryDto)
     {
+
+        var category = categoryDto.ToCategory();
+
         var createCategory = _uow.CategoryRepository.Create(category);
         _uow.Commit();
 
+        var createCategoryDto = createCategory.ToCategoryDTO();
+
         return new CreatedAtRouteResult("TakeCategory",
-            new { id = category.CategoryId }, createCategory);
+            new { id = createCategoryDto.CategoryId }, createCategoryDto);
     }
 
     [HttpDelete("{id:int}")]
-    public ActionResult<Category> Delete(int id)
+    public ActionResult<CategoryDTO> Delete(int id)
     {
         var getCategoryId = _uow.CategoryRepository.GetById(c => c.CategoryId == id);
-        _uow.CategoryRepository.Delete(getCategoryId);
+
+
+        var deletedCategory = _uow.CategoryRepository.Delete(getCategoryId);
         _uow.Commit();
-        return Ok(getCategoryId);
+
+        var categoryDto = deletedCategory.ToCategoryDTO();
+        return Ok(categoryDto);
     }
     [HttpPut("{id:int}")]
-    public ActionResult<Category> Put (int id, Category category)
+    public ActionResult<CategoryDTO> Put (int id, CategoryDTO categoryDto)
     {
-        _uow.CategoryRepository.Update(category);
+        var category = categoryDto.ToCategory();
+        var editedCategory = _uow.CategoryRepository.Update(category);
         _uow.Commit();
-        return Ok(category);
+
+        var editedCategoryDto = editedCategory.ToCategoryDTO();
+        return Ok(editedCategoryDto);
     }
 }
