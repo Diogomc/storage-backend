@@ -4,7 +4,7 @@ namespace Storage.Models;
 
 public class Product
 {
-    [JsonIgnore]
+
     public int ProductId { get; set; }
     public string? ProductName { get; set; }
     public DateTime ExpirationDate { get; set; }

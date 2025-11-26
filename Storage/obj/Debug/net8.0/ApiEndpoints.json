@@ -139,7 +139,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Storage.Models.Product, Storage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Storage.DTOs.ProductDTO, Storage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -158,14 +158,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "product",
-        "Type": "Storage.Models.Product",
+        "Name": "productDto",
+        "Type": "Storage.DTOs.ProductDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Storage.Models.Product",
+        "Type": "Storage.DTOs.ProductDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -191,7 +191,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Storage.Models.Product",
+        "Type": "Storage.DTOs.ProductDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -218,7 +218,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Storage.Models.Product",
+        "Type": "Storage.DTOs.ProductDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -242,14 +242,34 @@
         "IsRequired": true
       },
       {
-        "Name": "product",
-        "Type": "Storage.Models.Product",
+        "Name": "productDto",
+        "Type": "Storage.DTOs.ProductDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Storage.Models.Product",
+        "Type": "Storage.DTOs.ProductDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Storage.Controllers.ProductController",
+    "Method": "GetExpiredProducts",
+    "RelativePath": "api/Product/expired",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Storage.DTOs.ProductDTO, Storage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

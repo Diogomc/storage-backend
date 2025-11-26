@@ -30,7 +30,19 @@ public class ProductController : ControllerBase
         var getProductId = _uow.ProductRepository.GetById(p => p.ProductId == id);
 
         var productDto = getProductId.ToProductDTO();
-        return Ok(getProductId);
+        return Ok(productDto);
+    }
+    [HttpGet("expired")]
+    public ActionResult<IEnumerable<ProductDTO>> GetExpiredProducts()
+    {
+        var today = DateTime.Now;
+
+        var expiredProduct = _uow.ProductRepository.GetAll()
+            .Where(p => p.ExpirationDate < today);
+
+        var expiredProductDto = expiredProduct.ToProductDTOList();
+
+        return Ok(expiredProduct);
     }
     [HttpPost]
     public ActionResult<ProductDTO> Post(ProductDTO productDto)

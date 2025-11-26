@@ -15,9 +15,11 @@ public static class ProductDTOMappingExtensions
             ProductId = product.ProductId,
             ProductName = product.ProductName,
             Batch = product.Batch,
-            ExpirationDate = product.ExpirationDate,
+            ExpirationDate = product.ExpirationDate.ToString("dd-MM-yyyy"),
             ProductBrand = product.ProductBrand,
-            SupplierName = product.SupplierName
+            SupplierName = product.SupplierName,
+            CategoryId = product.CategoryId
+            
         };
     }
     public static Product? ToProduct (this ProductDTO productDTO)
@@ -32,9 +34,10 @@ public static class ProductDTOMappingExtensions
             ProductId = productDTO.ProductId,
             ProductName = productDTO.ProductName,
             Batch = productDTO.Batch,
-            ExpirationDate = productDTO.ExpirationDate,
+            ExpirationDate = DateTime.Parse(productDTO.ExpirationDate),
             ProductBrand = productDTO.ProductBrand,
-            SupplierName = productDTO.SupplierName
+            SupplierName = productDTO.SupplierName,
+            CategoryId = productDTO.CategoryId
         };
     }
     public static IEnumerable<ProductDTO> ToProductDTOList (this IEnumerable<Product> products)
@@ -44,9 +47,11 @@ public static class ProductDTOMappingExtensions
             ProductId = products.ProductId,
             ProductName = products.ProductName,
             Batch = products.Batch,
-            ExpirationDate = products.ExpirationDate,
+            ExpirationDate = products.ExpirationDate.ToString("dd-MM-yyyy"),
             ProductBrand = products.ProductBrand,
-            SupplierName = products.SupplierName
+            SupplierName = products.SupplierName,
+            CategoryId = products.CategoryId
+            
         }).ToList();
     }
 }
