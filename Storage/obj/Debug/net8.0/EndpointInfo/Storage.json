@@ -445,6 +445,38 @@
         }
       }
     },
+    "/api/Product/AllProducts": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Product/expired": {
       "get": {
         "tags": [
@@ -476,6 +508,38 @@
                   "items": {
                     "$ref": "#/components/schemas/ProductDTO"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Product/TotalValue": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "number",
+                  "format": "double"
                 }
               }
             }
@@ -525,6 +589,16 @@
           },
           "productBrand": {
             "type": "string",
+            "nullable": true
+          },
+          "availableQuantity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           },
           "categoryId": {

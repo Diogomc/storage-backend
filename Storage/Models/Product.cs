@@ -11,7 +11,8 @@ public class Product
     public string? Batch { get; set; }
     public string? SupplierName { get; set; }
     public string? ProductBrand { get; set; }
-
+    public int? AvailableQuantity { get; set; }
+    public decimal? Price { get; set; }
     public int CategoryId { get; set; }
     [JsonIgnore]
     public Category? categories { get; set; }

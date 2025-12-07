@@ -18,6 +18,8 @@ public static class ProductDTOMappingExtensions
             ExpirationDate = product.ExpirationDate.ToString("dd-MM-yyyy"),
             ProductBrand = product.ProductBrand,
             SupplierName = product.SupplierName,
+            Price = product.Price,
+            AvailableQuantity = product.AvailableQuantity,
             CategoryId = product.CategoryId
             
         };
@@ -37,6 +39,8 @@ public static class ProductDTOMappingExtensions
             ExpirationDate = DateTime.Parse(productDTO.ExpirationDate),
             ProductBrand = productDTO.ProductBrand,
             SupplierName = productDTO.SupplierName,
+            Price = productDTO.Price,
+            AvailableQuantity = productDTO.AvailableQuantity,
             CategoryId = productDTO.CategoryId
         };
     }
@@ -50,6 +54,8 @@ public static class ProductDTOMappingExtensions
             ExpirationDate = products.ExpirationDate.ToString("dd-MM-yyyy"),
             ProductBrand = products.ProductBrand,
             SupplierName = products.SupplierName,
+            AvailableQuantity = products.AvailableQuantity,
+            Price = products.Price,
             CategoryId = products.CategoryId
             
         }).ToList();

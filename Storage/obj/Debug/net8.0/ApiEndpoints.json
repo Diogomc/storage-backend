@@ -261,6 +261,26 @@
   },
   {
     "ContainingType": "Storage.Controllers.ProductController",
+    "Method": "GetAllProducts",
+    "RelativePath": "api/Product/AllProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Storage.Controllers.ProductController",
     "Method": "GetExpiredProducts",
     "RelativePath": "api/Product/expired",
     "HttpMethod": "GET",
@@ -270,6 +290,26 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[Storage.DTOs.ProductDTO, Storage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Storage.Controllers.ProductController",
+    "Method": "GetTotalValue",
+    "RelativePath": "api/Product/TotalValue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Decimal",
         "MediaTypes": [
           "text/plain",
           "application/json",

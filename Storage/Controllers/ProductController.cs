@@ -32,6 +32,14 @@ public class ProductController : ControllerBase
         var productDto = getProductId.ToProductDTO();
         return Ok(productDto);
     }
+    [HttpGet("AllProducts")]
+    public ActionResult<int> GetAllProducts()
+    {
+        var products = _uow.ProductRepository.GetAll().Sum(p => p.AvailableQuantity);
+
+        return Ok(products);
+            
+    }
     [HttpGet("expired")]
     public ActionResult<IEnumerable<ProductDTO>> GetExpiredProducts()
     {
@@ -42,7 +50,15 @@ public class ProductController : ControllerBase
 
         var expiredProductDto = expiredProduct.ToProductDTOList();
 
-        return Ok(expiredProduct);
+        return Ok(expiredProductDto);
+    }
+    [HttpGet("TotalValue")]
+    public ActionResult<decimal> GetTotalValue()
+    {
+        var products = _uow.ProductRepository.GetAll()
+            .Sum(p => p.Price * p.AvailableQuantity);
+
+        return Ok(products);
     }
     [HttpPost]
     public ActionResult<ProductDTO> Post(ProductDTO productDto)
