@@ -4,6 +4,7 @@ using Storage.DTOs;
 using Storage.DTOs.Mappings;
 using Storage.Models;
 using Storage.Repositories;
+using System.Runtime.InteropServices;
 
 namespace Storage.Controllers;
 [ApiController]
@@ -32,6 +33,7 @@ public class ProductController : ControllerBase
         var productDto = getProductId.ToProductDTO();
         return Ok(productDto);
     }
+
     [HttpGet("AllProducts")]
     public ActionResult<int> GetAllProducts()
     {
@@ -52,6 +54,20 @@ public class ProductController : ControllerBase
 
         return Ok(expiredProductDto);
     }
+
+    [HttpGet("CloseToExpiration")]
+    public ActionResult<IEnumerable<ProductDTO>> GetCloseToExpiration()
+    {
+        var today = DateTime.Today;
+
+        var products = _uow.ProductRepository.GetAll()
+            .Where(p => p.ExpirationDate > today && 
+            p.ExpirationDate <= today.AddDays(20));
+        var productsDto = products.ToProductDTOList();
+
+        return Ok(productsDto);
+    }
+
     [HttpGet("TotalValue")]
     public ActionResult<decimal> GetTotalValue()
     {
