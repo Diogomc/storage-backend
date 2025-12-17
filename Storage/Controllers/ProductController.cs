@@ -1,117 +1,72 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Storage.Context;
 using Storage.DTOs;
-using Storage.DTOs.Mappings;
-using Storage.Models;
-using Storage.Repositories;
-using System.Runtime.InteropServices;
+using Storage.Services;
 
 namespace Storage.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
-    public readonly IUnitOfWork _uow;
+    public readonly IProductService _service;
 
-    public ProductController(IUnitOfWork uow)
+    public ProductController(IProductService service)
     {
-        _uow = uow;
+        _service = service;
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<ProductDTO>> Get()
+    public ActionResult<IEnumerable<ProductDTO>> GetAll()
     {
-        var products = _uow.ProductRepository.GetAll().ToList();
-        var productsDto = products.ToProductDTOList();
-        return Ok(productsDto);
+        return Ok(_service.GetAll());
     }
+
     [HttpGet("{id:int}", Name = "TakeProduct")]
     public ActionResult<ProductDTO> GetById(int id)
     {
-        var getProductId = _uow.ProductRepository.GetById(p => p.ProductId == id);
+        var product = _service.GetById(id);
+        if (product is null) return NotFound("Product not found");
 
-        var productDto = getProductId.ToProductDTO();
-        return Ok(productDto);
+        return Ok(product);
     }
-
-    [HttpGet("AllProducts")]
-    public ActionResult<int> GetAllProducts()
+    [HttpGet("TotalQuantity")]
+    public ActionResult<int> GetTotalQuantity()
     {
-        var products = _uow.ProductRepository.GetAll().Sum(p => p.AvailableQuantity);
-
-        return Ok(products);
-            
+        return Ok(_service.GetTotalQuantity());
     }
-    [HttpGet("expired")]
+    [HttpGet("Expireds")]
     public ActionResult<IEnumerable<ProductDTO>> GetExpiredProducts()
     {
-        var today = DateTime.Now;
-
-        var expiredProduct = _uow.ProductRepository.GetAll()
-            .Where(p => p.ExpirationDate < today);
-
-        var expiredProductDto = expiredProduct.ToProductDTOList();
-
-        return Ok(expiredProductDto);
+        return Ok(_service.GetExpiredProducts());
     }
-
-    [HttpGet("CloseToExpiration")]
-    public ActionResult<IEnumerable<ProductDTO>> GetCloseToExpiration()
+    [HttpGet("CloseExpirationPerishables")]
+    public ActionResult<IEnumerable<ProductDTO>> GetCloseExpirationPerishables()
     {
-        var today = DateTime.Today;
-
-        var products = _uow.ProductRepository.GetAll()
-            .Where(p => p.ExpirationDate > today && 
-            p.ExpirationDate <= today.AddDays(20));
-        var productsDto = products.ToProductDTOList();
-
-        return Ok(productsDto);
+        return Ok(_service.GetCloseExpirationPerishables());
     }
-
     [HttpGet("TotalValue")]
     public ActionResult<decimal> GetTotalValue()
     {
-        var products = _uow.ProductRepository.GetAll()
-            .Sum(p => p.Price * p.AvailableQuantity);
-
-        return Ok(products);
+        return Ok(_service.GetTotalValue());
+    }
+    [HttpGet("CloseExpiration")]
+    public ActionResult<IEnumerable<ProductDTO>> GetCloseExpiration()
+    {
+        return Ok(_service.GetCloseToExpiration());
     }
     [HttpPost]
     public ActionResult<ProductDTO> Post(ProductDTO productDto)
     {
-        var product = productDto.ToProduct();
-
-        var createProduct = _uow.ProductRepository.Create(product);
-        _uow.Commit();
-
-        var createProductDto = createProduct.ToProductDTO();
-
-        return new CreatedAtRouteResult("TakeProduct",
-            new { id = createProductDto.ProductId }, createProductDto);
+        var created = _service.Create(productDto);
+        return new CreatedAtRouteResult("TakeProduct", new { id = productDto.ProductId }, created);
     }
-
-
+    [HttpPut("{id:int}")]
+    public ActionResult<ProductDTO> Put (int id, ProductDTO productDTO)
+    {
+        return Ok(_service.Update(id, productDTO));
+    }
     [HttpDelete("{id:int}")]
     public ActionResult<ProductDTO> Delete(int id)
     {
-        var getProductId = _uow.ProductRepository.GetById(p => p.ProductId == id);
-
-        var deletedProduct = _uow.ProductRepository.Delete(getProductId);
-        _uow.Commit();
-
-        var productDto = deletedProduct.ToProductDTO();
-
-        return Ok(productDto);
-    }
-
-    [HttpPut("{id:int}")]
-    public ActionResult<ProductDTO> Put(int id, ProductDTO productDto)
-    {
-        var product = productDto.ToProduct();
-        var editedProduct = _uow.ProductRepository.Update(product);
-        _uow.Commit();
-
-        var editedProductDto = editedProduct.ToProductDTO();
-        return Ok(editedProductDto);
+        return Ok(_service.Delete(id));
     }
 }

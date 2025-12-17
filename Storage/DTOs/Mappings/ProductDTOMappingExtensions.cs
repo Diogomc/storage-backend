@@ -20,6 +20,7 @@ public static class ProductDTOMappingExtensions
             SupplierName = product.SupplierName,
             Price = product.Price,
             AvailableQuantity = product.AvailableQuantity,
+            IsPerishable = product.IsPerishable,
             CategoryId = product.CategoryId
             
         };
@@ -41,6 +42,7 @@ public static class ProductDTOMappingExtensions
             SupplierName = productDTO.SupplierName,
             Price = productDTO.Price,
             AvailableQuantity = productDTO.AvailableQuantity,
+            IsPerishable = productDTO.IsPerishable,
             CategoryId = productDTO.CategoryId
         };
     }
@@ -56,6 +58,7 @@ public static class ProductDTOMappingExtensions
             SupplierName = products.SupplierName,
             AvailableQuantity = products.AvailableQuantity,
             Price = products.Price,
+            IsPerishable = products.IsPerishable,
             CategoryId = products.CategoryId
             
         }).ToList();

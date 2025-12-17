@@ -10,6 +10,8 @@ public class ProductDTO
     public string? ProductBrand { get; set; }
     public int? AvailableQuantity { get; set; }
     public decimal? Price { get; set; }
+    public bool IsPerishable { get; set; }
+
 
     public int CategoryId { get; set; }
 

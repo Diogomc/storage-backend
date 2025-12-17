@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace Storage.Models;
-
 public class Product
 {
 
@@ -13,6 +12,9 @@ public class Product
     public string? ProductBrand { get; set; }
     public int? AvailableQuantity { get; set; }
     public decimal? Price { get; set; }
+
+    public bool IsPerishable { get; set; }
+
     public int CategoryId { get; set; }
     [JsonIgnore]
     public Category? categories { get; set; }

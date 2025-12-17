@@ -349,44 +349,6 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "Product"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductDTO"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductDTO"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductDTO"
-                }
-              }
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "Product"
@@ -443,9 +405,47 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "/api/Product/AllProducts": {
+    "/api/Product/TotalQuantity": {
       "get": {
         "tags": [
           "Product"
@@ -477,7 +477,7 @@
         }
       }
     },
-    "/api/Product/expired": {
+    "/api/Product/Expireds": {
       "get": {
         "tags": [
           "Product"
@@ -515,7 +515,7 @@
         }
       }
     },
-    "/api/Product/CloseToExpiration": {
+    "/api/Product/CloseExpirationPerishables": {
       "get": {
         "tags": [
           "Product"
@@ -584,6 +584,44 @@
           }
         }
       }
+    },
+    "/api/Product/CloseExpiration": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -638,6 +676,9 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "isPerishable": {
+            "type": "boolean"
           },
           "categoryId": {
             "type": "integer",
