@@ -21,6 +21,7 @@ public static class ProductDTOMappingExtensions
             Price = product.Price,
             AvailableQuantity = product.AvailableQuantity,
             IsPerishable = product.IsPerishable,
+            EntryDate = product.EntryDate.ToString("dd/MM/yyyy"),
             CategoryId = product.CategoryId
             
         };
@@ -41,6 +42,7 @@ public static class ProductDTOMappingExtensions
             ProductBrand = productDTO.ProductBrand,
             SupplierName = productDTO.SupplierName,
             Price = productDTO.Price,
+            EntryDate = DateTime.Parse(productDTO.EntryDate),
             AvailableQuantity = productDTO.AvailableQuantity,
             IsPerishable = productDTO.IsPerishable,
             CategoryId = productDTO.CategoryId
@@ -58,6 +60,7 @@ public static class ProductDTOMappingExtensions
             SupplierName = products.SupplierName,
             AvailableQuantity = products.AvailableQuantity,
             Price = products.Price,
+            EntryDate = products.EntryDate.ToString("dd/MM/yyyy"),
             IsPerishable = products.IsPerishable,
             CategoryId = products.CategoryId
             

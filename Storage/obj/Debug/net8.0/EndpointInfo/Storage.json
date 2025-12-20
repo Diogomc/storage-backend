@@ -655,6 +655,10 @@
             "type": "string",
             "nullable": true
           },
+          "entryDate": {
+            "type": "string",
+            "nullable": true
+          },
           "batch": {
             "type": "string",
             "nullable": true

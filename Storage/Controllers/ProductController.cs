@@ -53,6 +53,8 @@ public class ProductController : ControllerBase
     {
         return Ok(_service.GetCloseToExpiration());
     }
+
+
     [HttpPost]
     public ActionResult<ProductDTO> Post(ProductDTO productDto)
     {

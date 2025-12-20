@@ -61,8 +61,7 @@ namespace Storage.Services
         {
             var today = DateTime.Today;
             var products = _uow.ProductRepository.GetAll()
-                .Where(p => p.IsPerishable == false)
-                .Where(p => p.ExpirationDate < today && p.ExpirationDate <= today);
+                      .Where(p => p.ExpirationDate < today && p.ExpirationDate <= today);
             return products.ToProductDTOList();
             
         }
