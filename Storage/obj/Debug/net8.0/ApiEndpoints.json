@@ -321,6 +321,46 @@
   },
   {
     "ContainingType": "Storage.Controllers.ProductController",
+    "Method": "GetGrossValueTotal",
+    "RelativePath": "api/Product/GrossValue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Decimal",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Storage.Controllers.ProductController",
+    "Method": "GetProfitMargin",
+    "RelativePath": "api/Product/ProfitMargin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Decimal",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Storage.Controllers.ProductController",
     "Method": "GetTotalQuantity",
     "RelativePath": "api/Product/TotalQuantity",
     "HttpMethod": "GET",

@@ -65,7 +65,12 @@ namespace Storage.Services
             return products.ToProductDTOList();
             
         }
-
+        public decimal GetTotalGrossValue()
+        {
+            var gross = _uow.ProductRepository.GetAll()
+                .Sum(p => (p.PurchasePrice ?? 0) * (p.AvailableQuantity ?? 0));
+            return gross;
+        }
         public int GetTotalQuantity()
         {
             return _uow.ProductRepository.GetAll().Sum(p => p.AvailableQuantity ?? 0);
@@ -74,10 +79,16 @@ namespace Storage.Services
         public decimal GetTotalValue()
         {
             var total =  _uow.ProductRepository.GetAll()
-                .Sum(p => (p.AvailableQuantity ?? 0) * (p.Price ?? 0));
+                .Sum(p => (p.AvailableQuantity ?? 0) * (p.SalePrice ?? 0));
 
             return total;
 
+        }
+        public decimal GetProfitMargin ()
+        {
+            var margin = _uow.ProductRepository.GetAll()
+                .Sum(p => (p.SalePrice ?? 0) - (p.PurchasePrice ?? 0));
+            return margin;
         }
 
         

@@ -53,8 +53,16 @@ public class ProductController : ControllerBase
     {
         return Ok(_service.GetCloseToExpiration());
     }
-
-
+    [HttpGet("GrossValue")]
+    public ActionResult<decimal> GetGrossValueTotal ()
+    {
+        return Ok(_service.GetTotalGrossValue());
+    }
+    [HttpGet("ProfitMargin")]
+    public ActionResult<decimal> GetProfitMargin ()
+    {
+        return Ok(_service.GetProfitMargin());
+    }
     [HttpPost]
     public ActionResult<ProductDTO> Post(ProductDTO productDto)
     {

@@ -16,7 +16,8 @@ namespace Storage.Configuration
             builder.Property(p => p.SupplierName).HasMaxLength(200).IsRequired();
             builder.Property(p => p.ProductBrand).HasMaxLength(200).IsRequired();
             builder.Property(p => p.AvailableQuantity).HasMaxLength(150).IsRequired();
-            builder.Property(p => p.Price).HasMaxLength(150).IsRequired();
+            builder.Property(p => p.SalePrice).HasMaxLength(150).IsRequired();
+            builder.Property(p => p.PurchasePrice).HasMaxLength(150).IsRequired();
         }
     }
 }

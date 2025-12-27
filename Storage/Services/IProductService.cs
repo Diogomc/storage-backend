@@ -11,6 +11,8 @@ public interface IProductService
     IEnumerable<ProductDTO> GetCloseToExpiration();
     IEnumerable<ProductDTO> GetCloseExpirationPerishables();
     decimal GetTotalValue();
+    decimal GetProfitMargin();
+    decimal GetTotalGrossValue();
     ProductDTO Create(ProductDTO productDTO);
     ProductDTO Update(int id, ProductDTO productDTO);
     ProductDTO Delete(int id);

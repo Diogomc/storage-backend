@@ -12,7 +12,8 @@ public class Product
     public string? SupplierName { get; set; }
     public string? ProductBrand { get; set; }
     public int? AvailableQuantity { get; set; }
-    public decimal? Price { get; set; }
+    public decimal? SalePrice { get; set; }
+    public decimal? PurchasePrice { get; set; }
 
     public bool IsPerishable { get; set; }
 
