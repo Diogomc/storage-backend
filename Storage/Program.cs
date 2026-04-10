@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Storage.Context;
 using Storage.Repositories;
 using Storage.Services;
+using Storage.Strategies.NearToExpired;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,15 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+
+
+builder.Services.AddScoped<INearToExpireAlert, NotPerishableProductAlert>();
+builder.Services.AddScoped<INearToExpireAlert, FrozenProductAlert>();
+builder.Services.AddScoped<INearToExpireAlert, PerishableProductAlert>();
+builder.Services.AddScoped<NearToExpireAlert>();
+
 builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddCors(options =>

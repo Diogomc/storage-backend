@@ -261,15 +261,21 @@
   },
   {
     "ContainingType": "Storage.Controllers.ProductController",
-    "Method": "GetCloseExpiration",
-    "RelativePath": "api/Product/CloseExpiration",
+    "Method": "GetByName",
+    "RelativePath": "api/Product/{name}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Storage.DTOs.ProductDTO, Storage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Storage.DTOs.ProductDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -281,8 +287,8 @@
   },
   {
     "ContainingType": "Storage.Controllers.ProductController",
-    "Method": "GetCloseExpirationPerishables",
-    "RelativePath": "api/Product/CloseExpirationPerishables",
+    "Method": "GetCloseExpiration",
+    "RelativePath": "api/Product/CloseExpiration",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

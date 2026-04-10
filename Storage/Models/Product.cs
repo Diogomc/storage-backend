@@ -15,7 +15,7 @@ public class Product
     public decimal? SalePrice { get; set; }
     public decimal? PurchasePrice { get; set; }
 
-    public bool IsPerishable { get; set; }
+    public string? PerishableCategory { get; set; }
 
     public int CategoryId { get; set; }
     [JsonIgnore]

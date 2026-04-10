@@ -28,6 +28,11 @@ public class ProductController : ControllerBase
 
         return Ok(product);
     }
+    [HttpGet("{name}")]
+    public ActionResult<ProductDTO> GetByName(string name)
+    {
+        return Ok(_service.GetByName(name));
+    }
     [HttpGet("TotalQuantity")]
     public ActionResult<int> GetTotalQuantity()
     {
@@ -37,11 +42,6 @@ public class ProductController : ControllerBase
     public ActionResult<IEnumerable<ProductDTO>> GetExpiredProducts()
     {
         return Ok(_service.GetExpiredProducts());
-    }
-    [HttpGet("CloseExpirationPerishables")]
-    public ActionResult<IEnumerable<ProductDTO>> GetCloseExpirationPerishables()
-    {
-        return Ok(_service.GetCloseExpirationPerishables());
     }
     [HttpGet("TotalValue")]
     public ActionResult<decimal> GetTotalValue()

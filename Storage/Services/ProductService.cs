@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Storage.DTOs;
 using Storage.DTOs.Mappings;
+using Storage.Models;
 using Storage.Repositories;
+using Storage.Strategies.NearToExpired;
 using System;
 using System.Globalization;
 
@@ -10,15 +12,26 @@ namespace Storage.Services
     public class ProductService : IProductService
     {
         private readonly IUnitOfWork _uow;
+        private readonly NearToExpireAlert _nearToExpire;
 
-        public ProductService(IUnitOfWork uow)
+        public ProductService(IUnitOfWork uow, NearToExpireAlert nearToExpire)
         {
             _uow = uow;
+            _nearToExpire = nearToExpire;
         }
 
         public IEnumerable<ProductDTO> GetAll()
         {
             return _uow.ProductRepository.GetAll().ToProductDTOList();
+        }
+
+        public ProductDTO GetByName(string name)
+        {
+            var product = _uow.ProductRepository.GetAll()
+                .FirstOrDefault(p => p.ProductName == name);
+
+            var dto = product.ToProductDTO();
+            return dto;
         }
 
         public ProductDTO GetById(int id)
@@ -29,32 +42,6 @@ namespace Storage.Services
                 throw new KeyNotFoundException("Product not found");
 
             return product.ToProductDTO();
-        }
-
-        public IEnumerable<ProductDTO> GetCloseExpirationPerishables()
-        {
-            var today = DateTime.Today;
-
-                 return _uow.ProductRepository.GetAll()
-                .Where(p => p.IsPerishable == true)
-                .Where(p => p.ExpirationDate > today && p.ExpirationDate <= today.AddDays(5))
-                .Select(p => new ProductDTO
-                {
-                    ProductName = p.ProductName,
-                    ExpirationDate = p.ExpirationDate.ToString("dd/MM/yyyy")
-                }).ToList();
-
-        }
-
-        public IEnumerable<ProductDTO> GetCloseToExpiration()
-        {
-            var today = DateTime.Today;
-
-            var closeExpiration = _uow.ProductRepository.GetAll()
-                .Where(p => p.IsPerishable == false)
-                .Where(p => p.ExpirationDate > today && p.ExpirationDate <= today.AddDays(20));
-
-            return closeExpiration.ToProductDTOList();
         }
 
         public IEnumerable<ProductDTO> GetExpiredProducts()
@@ -125,5 +112,14 @@ namespace Storage.Services
 
         }
 
+        public IEnumerable<ProductDTO> GetCloseToExpiration()
+        {
+            var products = GetAll();
+            return products.Where(p =>
+            {
+                var alert = _nearToExpire.GetAlert(p);
+                return alert.IsCloseToExpiration(p);
+            });
+        }
     }
 }

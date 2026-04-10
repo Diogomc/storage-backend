@@ -9,7 +9,7 @@ public interface IProductService
     int GetTotalQuantity();
     IEnumerable<ProductDTO> GetExpiredProducts();
     IEnumerable<ProductDTO> GetCloseToExpiration();
-    IEnumerable<ProductDTO> GetCloseExpirationPerishables();
+    ProductDTO GetByName(string name);
     decimal GetTotalValue();
     decimal GetProfitMargin();
     decimal GetTotalGrossValue();

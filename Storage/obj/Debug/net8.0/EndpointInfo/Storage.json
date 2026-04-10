@@ -445,6 +445,45 @@
         }
       }
     },
+    "/api/Product/{name}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Product/TotalQuantity": {
       "get": {
         "tags": [
@@ -478,44 +517,6 @@
       }
     },
     "/api/Product/Expireds": {
-      "get": {
-        "tags": [
-          "Product"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductDTO"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductDTO"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Product/CloseExpirationPerishables": {
       "get": {
         "tags": [
           "Product"
@@ -717,7 +718,7 @@
           },
           "expirationDate": {
             "type": "string",
-            "nullable": true
+            "format": "date-time"
           },
           "entryDate": {
             "type": "string",
@@ -750,8 +751,9 @@
             "format": "double",
             "nullable": true
           },
-          "isPerishable": {
-            "type": "boolean"
+          "perishableCategory": {
+            "type": "string",
+            "nullable": true
           },
           "categoryId": {
             "type": "integer",
