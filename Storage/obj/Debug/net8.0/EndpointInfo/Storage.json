@@ -445,10 +445,10 @@
         }
       }
     },
-    "/api/Product/{name}": {
+    "/api/ProductReports/{name}": {
       "get": {
         "tags": [
-          "Product"
+          "ProductReports"
         ],
         "parameters": [
           {
@@ -484,10 +484,10 @@
         }
       }
     },
-    "/api/Product/TotalQuantity": {
+    "/api/ProductReports/TotalQuantity": {
       "get": {
         "tags": [
-          "Product"
+          "ProductReports"
         ],
         "responses": {
           "200": {
@@ -516,10 +516,10 @@
         }
       }
     },
-    "/api/Product/Expireds": {
+    "/api/ProductReports/Expireds": {
       "get": {
         "tags": [
-          "Product"
+          "ProductReports"
         ],
         "responses": {
           "200": {
@@ -554,10 +554,10 @@
         }
       }
     },
-    "/api/Product/TotalValue": {
+    "/api/ProductReports/TotalValue": {
       "get": {
         "tags": [
-          "Product"
+          "ProductReports"
         ],
         "responses": {
           "200": {
@@ -586,10 +586,10 @@
         }
       }
     },
-    "/api/Product/CloseExpiration": {
+    "/api/ProductReports/CloseExpiration": {
       "get": {
         "tags": [
-          "Product"
+          "ProductReports"
         ],
         "responses": {
           "200": {
@@ -624,10 +624,10 @@
         }
       }
     },
-    "/api/Product/GrossValue": {
+    "/api/ProductReports/GrossValue": {
       "get": {
         "tags": [
-          "Product"
+          "ProductReports"
         ],
         "responses": {
           "200": {
@@ -656,10 +656,10 @@
         }
       }
     },
-    "/api/Product/ProfitMargin": {
+    "/api/ProductReports/ProfitMargin": {
       "get": {
         "tags": [
-          "Product"
+          "ProductReports"
         ],
         "responses": {
           "200": {
@@ -743,8 +743,7 @@
           },
           "salePrice": {
             "type": "number",
-            "format": "double",
-            "nullable": true
+            "format": "double"
           },
           "purchasePrice": {
             "type": "number",

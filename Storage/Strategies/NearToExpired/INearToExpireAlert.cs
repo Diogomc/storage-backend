@@ -6,5 +6,6 @@ namespace Storage.Strategies.NearToExpired
     {
         string perishableCategory { get; }
         bool IsCloseToExpiration(ProductDTO product);
+        decimal AplyDiscount(ProductDTO product);
     }
 }

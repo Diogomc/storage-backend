@@ -119,6 +119,11 @@ namespace Storage.Services
             {
                 var alert = _nearToExpire.GetAlert(p);
                 return alert.IsCloseToExpiration(p);
+            }).Select(p =>
+            {
+                var alert = _nearToExpire.GetAlert(p);
+                p.SalePrice = alert.AplyDiscount(p);
+                return p;
             });
         }
     }

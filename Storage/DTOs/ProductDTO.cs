@@ -10,7 +10,7 @@ public class ProductDTO
     public string? SupplierName { get; set; }
     public string? ProductBrand { get; set; }
     public int? AvailableQuantity { get; set; }
-    public decimal? SalePrice { get; set; }
+    public decimal SalePrice { get; set; }
     public decimal? PurchasePrice { get; set; }
     public string? PerishableCategory { get; set; }
 

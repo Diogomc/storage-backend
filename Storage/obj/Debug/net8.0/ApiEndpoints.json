@@ -260,9 +260,9 @@
     ]
   },
   {
-    "ContainingType": "Storage.Controllers.ProductController",
+    "ContainingType": "Storage.Controllers.ProductReportsController",
     "Method": "GetByName",
-    "RelativePath": "api/Product/{name}",
+    "RelativePath": "api/ProductReports/{name}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -286,9 +286,9 @@
     ]
   },
   {
-    "ContainingType": "Storage.Controllers.ProductController",
+    "ContainingType": "Storage.Controllers.ProductReportsController",
     "Method": "GetCloseExpiration",
-    "RelativePath": "api/Product/CloseExpiration",
+    "RelativePath": "api/ProductReports/CloseExpiration",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -306,9 +306,9 @@
     ]
   },
   {
-    "ContainingType": "Storage.Controllers.ProductController",
+    "ContainingType": "Storage.Controllers.ProductReportsController",
     "Method": "GetExpiredProducts",
-    "RelativePath": "api/Product/Expireds",
+    "RelativePath": "api/ProductReports/Expireds",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -326,9 +326,9 @@
     ]
   },
   {
-    "ContainingType": "Storage.Controllers.ProductController",
+    "ContainingType": "Storage.Controllers.ProductReportsController",
     "Method": "GetGrossValueTotal",
-    "RelativePath": "api/Product/GrossValue",
+    "RelativePath": "api/ProductReports/GrossValue",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -346,9 +346,9 @@
     ]
   },
   {
-    "ContainingType": "Storage.Controllers.ProductController",
+    "ContainingType": "Storage.Controllers.ProductReportsController",
     "Method": "GetProfitMargin",
-    "RelativePath": "api/Product/ProfitMargin",
+    "RelativePath": "api/ProductReports/ProfitMargin",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -366,9 +366,9 @@
     ]
   },
   {
-    "ContainingType": "Storage.Controllers.ProductController",
+    "ContainingType": "Storage.Controllers.ProductReportsController",
     "Method": "GetTotalQuantity",
-    "RelativePath": "api/Product/TotalQuantity",
+    "RelativePath": "api/ProductReports/TotalQuantity",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -386,9 +386,9 @@
     ]
   },
   {
-    "ContainingType": "Storage.Controllers.ProductController",
+    "ContainingType": "Storage.Controllers.ProductReportsController",
     "Method": "GetTotalValue",
-    "RelativePath": "api/Product/TotalValue",
+    "RelativePath": "api/ProductReports/TotalValue",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

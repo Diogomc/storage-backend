@@ -20,6 +20,7 @@ public class ProductController : ControllerBase
         return Ok(_service.GetAll());
     }
 
+
     [HttpGet("{id:int}", Name = "TakeProduct")]
     public ActionResult<ProductDTO> GetById(int id)
     {
@@ -27,53 +28,24 @@ public class ProductController : ControllerBase
         if (product is null) return NotFound("Product not found");
 
         return Ok(product);
-    }
-    [HttpGet("{name}")]
-    public ActionResult<ProductDTO> GetByName(string name)
-    {
-        return Ok(_service.GetByName(name));
-    }
-    [HttpGet("TotalQuantity")]
-    public ActionResult<int> GetTotalQuantity()
-    {
-        return Ok(_service.GetTotalQuantity());
-    }
-    [HttpGet("Expireds")]
-    public ActionResult<IEnumerable<ProductDTO>> GetExpiredProducts()
-    {
-        return Ok(_service.GetExpiredProducts());
-    }
-    [HttpGet("TotalValue")]
-    public ActionResult<decimal> GetTotalValue()
-    {
-        return Ok(_service.GetTotalValue());
-    }
-    [HttpGet("CloseExpiration")]
-    public ActionResult<IEnumerable<ProductDTO>> GetCloseExpiration()
-    {
-        return Ok(_service.GetCloseToExpiration());
-    }
-    [HttpGet("GrossValue")]
-    public ActionResult<decimal> GetGrossValueTotal ()
-    {
-        return Ok(_service.GetTotalGrossValue());
-    }
-    [HttpGet("ProfitMargin")]
-    public ActionResult<decimal> GetProfitMargin ()
-    {
-        return Ok(_service.GetProfitMargin());
-    }
+    } 
+
+
     [HttpPost]
     public ActionResult<ProductDTO> Post(ProductDTO productDto)
     {
         var created = _service.Create(productDto);
         return new CreatedAtRouteResult("TakeProduct", new { id = productDto.ProductId }, created);
     }
+
+
     [HttpPut("{id:int}")]
     public ActionResult<ProductDTO> Put (int id, ProductDTO productDTO)
     {
         return Ok(_service.Update(id, productDTO));
     }
+
+
     [HttpDelete("{id:int}")]
     public ActionResult<ProductDTO> Delete(int id)
     {
