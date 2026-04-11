@@ -17,9 +17,14 @@ public class Repository<T> : IRepository<T> where T : class
         return _context.Set<T>().ToList();
         
     }
-    public T? GetById(Expression<Func<T, bool>> predicate)
+    public T GetById(Expression<Func<T, bool>> predicate)
     {
-        return _context.Set<T>().FirstOrDefault(predicate);
+        var entity =  _context.Set<T>().FirstOrDefault(predicate);
+
+        if (entity is null)
+            throw new KeyNotFoundException($"{typeof(T).Name} not found");
+
+        return entity;
     }
     public T Create(T entity)
     {

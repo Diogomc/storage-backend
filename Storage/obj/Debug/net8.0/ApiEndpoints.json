@@ -260,9 +260,9 @@
     ]
   },
   {
-    "ContainingType": "Storage.Controllers.ProductReportsController",
+    "ContainingType": "Storage.Controllers.ProductController",
     "Method": "GetByName",
-    "RelativePath": "api/ProductReports/{name}",
+    "RelativePath": "api/Product/{name}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

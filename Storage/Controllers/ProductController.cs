@@ -28,8 +28,12 @@ public class ProductController : ControllerBase
         if (product is null) return NotFound("Product not found");
 
         return Ok(product);
-    } 
-
+    }
+    [HttpGet("{name}")]
+    public ActionResult<ProductDTO> GetByName(string name)
+    {
+        return Ok(_service.GetByName(name));
+    }
 
     [HttpPost]
     public ActionResult<ProductDTO> Post(ProductDTO productDto)

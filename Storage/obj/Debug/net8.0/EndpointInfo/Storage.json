@@ -445,10 +445,10 @@
         }
       }
     },
-    "/api/ProductReports/{name}": {
+    "/api/Product/{name}": {
       "get": {
         "tags": [
-          "ProductReports"
+          "Product"
         ],
         "parameters": [
           {
@@ -706,6 +706,13 @@
         "additionalProperties": false
       },
       "ProductDTO": {
+        "required": [
+          "batch",
+          "perishableCategory",
+          "productBrand",
+          "productName",
+          "supplierName"
+        ],
         "type": "object",
         "properties": {
           "productId": {
@@ -738,8 +745,7 @@
           },
           "availableQuantity": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "salePrice": {
             "type": "number",
@@ -747,8 +753,7 @@
           },
           "purchasePrice": {
             "type": "number",
-            "format": "double",
-            "nullable": true
+            "format": "double"
           },
           "perishableCategory": {
             "type": "string",

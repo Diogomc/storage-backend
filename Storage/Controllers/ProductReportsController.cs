@@ -9,18 +9,14 @@ namespace Storage.Controllers;
 
 public class ProductReportsController : ControllerBase
 {
-    private readonly IProductService _service;
+    private readonly IProductReportsService _service;
 
-    public ProductReportsController(IProductService productService)
+    public ProductReportsController(IProductReportsService producReportstService)
     {
-        _service = productService;
+        _service = producReportstService;
     }
 
-    [HttpGet("{name}")]
-    public ActionResult<ProductDTO> GetByName(string name)
-    {
-        return Ok(_service.GetByName(name));
-    }
+ 
     [HttpGet("TotalQuantity")]
     public ActionResult<int> GetTotalQuantity()
     {
